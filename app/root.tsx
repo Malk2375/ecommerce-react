@@ -6,7 +6,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-
+import Header from "./layouts/Header/Header";
 import type { Route } from "./+types/root";
 import "./app.css";
 import { AuthProvider } from "./contexts/auth/AuthContext";
@@ -34,6 +34,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <AuthProvider>
+          <Header title="Site ecommerce"/>
           {children}
         </AuthProvider>
         <ScrollRestoration />

@@ -3,68 +3,91 @@ import type { UserI } from "~/models/auth.interface";
 
 export const AuthContext = createContext<any>(null!);
 
-export const AuthProvider = ({children}: {children: ReactNode}) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [isLogged, setIsLogged] = useState(false);
     const [user, setUser] = useState<UserI>({} as UserI);
-    const [readSessionInfos, setReadSessionInfos] = useState(true);
-    const [users, setUsers] = useState<UserI[]>([]);
-
     const [error, setError] = useState<string | null>(null);
+    const [readSessionInfos, setReadSessionInfos] = useState(true);
 
-    const handleLogin = async (email: string, password: string) => {
-        const userFound = users.find(user => user.email === email && user.password === password);
-        if(userFound){
-            setUser(userFound);
-            saveUserInfos(userFound);
-            handleConnexion(true);
-            setError(null);
-        } else {
-            setError("Utilisateur ou mot de passe incorrect");
-            handleConnexion(false);
+    const handleLogin = async (username: string, password: string) => {
+        const credentials = { username, password };
+
+        try {
+            const response = await fetch("https://fakestoreapi.com/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(credentials),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Si la réponse est ok et contient un token
+                if (data.token) {
+                    await fetchUserInfo(username, data.token);
+                } else {
+                    setError("Erreur : pas de token retourné.");
+                    setIsLogged(false);
+                }
+            } else {
+                setError("Identifiants incorrects ou erreur serveur.");
+                setIsLogged(false);
+            }
+        } catch (error) {
+            setError("Une erreur est survenue. Veuillez réessayer.");
+            setIsLogged(false);
         }
-    }
-    const fetchUsers = async () => {
+    };
+    const fetchUserInfo = async (username: string, token: string) => {
         try {
             const response = await fetch("https://fakestoreapi.com/users");
-            const data = await response.json();
-            console.log("Données récupérées : ", data); // Affichage de la réponse du fetch
-            setUsers(data);
+            const users = await response.json();
+
+            // Chercher l'utilisateur avec le bon username
+            const userInfo = users.find((user: any) => user.username === username);
+
+            if (userInfo) {
+                // Sauvegarder les infos utilisateur et le token dans sessionStorage
+                saveUserInfos(token, userInfo);
+                setUser(userInfo);
+                setIsLogged(true);
+                setError(null);
+            } else {
+                setError("Utilisateur non trouvé.");
+                setIsLogged(false);
+            }
         } catch (error) {
-            console.error("Erreur lors de la récupération des utilisateurs:", error);
-            setError("Erreur lors de la récupération des utilisateurs");
+            setError("Impossible de récupérer les informations utilisateur.");
+            setIsLogged(false);
         }
-    }
+    };
+
+    const saveUserInfos = (token: string, userInfo: any) => {
+        sessionStorage.setItem("user", JSON.stringify({ token, ...userInfo }));
+    };
+
     const getUserSession = () => {
-        const userSession = sessionStorage.getItem("user")
+        const userSession = sessionStorage.getItem("user");
         return userSession ? JSON.parse(userSession) : undefined;
-    }
-
-    const handleConnexion = (state: boolean) => {
-        setIsLogged(state);
-    }
-    
-
-    const saveUserInfos = (user: UserI) => {
-        if(user) sessionStorage.setItem("user", JSON.stringify(user));
-    }
+    };
 
     const deleteUserSession = () => {
         sessionStorage.removeItem("user");
-    }
+    };
 
     useEffect(() => {
-        if(readSessionInfos){
+        if (readSessionInfos) {
             setReadSessionInfos(false);
             const savedUser = getUserSession();
-            if(savedUser){
+            if (savedUser) {
+                console.log("User session found:", savedUser);
                 setUser(savedUser);
-                handleConnexion(true);
-                console.log("Vous etes connecté", savedUser);
+                setIsLogged(true);
             }
-            fetchUsers();
         }
     }, [readSessionInfos]);
-
 
     return (
         <AuthContext.Provider
@@ -77,10 +100,10 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
                     deleteUserSession();
                     setIsLogged(false);
                     setUser({} as UserI);
-                }
+                },
             }}
         >
             {children}
         </AuthContext.Provider>
-    )
-}
+    );
+};

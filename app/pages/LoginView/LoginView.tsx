@@ -4,21 +4,21 @@ import { AuthContext } from "~/contexts/auth/AuthContext";
 import "./LoginView.css";
 
 export default function LoginView() {
-    const [email, setEmail] = useState("");
+    const { handleLogin, error, isLogged } = useContext(AuthContext);  // Utilise le contexte Auth pour appeler handleLogin
+    const [username, setUsername] = useState("");  // On utilise "username" maintenant
     const [password, setPassword] = useState("");
-    const { handleLogin, error, isLogged } = useContext(AuthContext);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (isLogged) {
-            navigate("/");
+            navigate("/");  // Redirige vers la page d'accueil si l'utilisateur est connecté
         }
     }, [isLogged, navigate]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log("Form submitted");
-        handleLogin(email, password);
+        handleLogin(username, password);  // Passe "username" à la place de "email"
     };
 
     return (
@@ -26,10 +26,10 @@ export default function LoginView() {
             <h1 className="login-title">Connexion</h1>
             <form className="login-form" onSubmit={handleSubmit}>
                 <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    type="text"
+                    placeholder="Nom d'utilisateur"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}  // Mise à jour de "username"
                     className="login-input"
                     required
                 />
@@ -41,7 +41,7 @@ export default function LoginView() {
                     className="login-input"
                     required
                 />
-                {error && <p className="login-error">{error}</p>}
+                {error && <p className="login-error">{error}</p>}  {/* Affiche les erreurs si elles existent */}
                 <button type="submit" className="login-submit-button">
                     Se connecter
                 </button>

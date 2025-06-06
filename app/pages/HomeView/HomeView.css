@@ -26,29 +26,6 @@
     font-size: 1.1rem;
 }
 
-.nav-link,
-.login-button,
-.logout-button {
-    display: inline-block;
-    margin: 10px;
-    padding: 12px 24px;
-    text-decoration: none;
-    font-size: 1rem;
-    border-radius: 8px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    cursor: pointer;
-}
-
-.nav-link {
-    background-color: #2196F3;
-    color: #fff;
-    border: none;
-}
-
-.nav-link:hover {
-    background-color: #1976D2;
-}
-
 .login-button {
     background-color: #4CAF50;
     color: #fff;

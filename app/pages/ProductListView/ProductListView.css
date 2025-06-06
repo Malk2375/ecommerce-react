@@ -1,0 +1,18 @@
+.product-list-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.btn-primary{
+    background-color: #9ab6d5;
+    border-color: #007bff;
+    color: white;
+    width: 14rem;
+    height: 3rem;
+    color: #000;
+    border-radius: 18px;
+}

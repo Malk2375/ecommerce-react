@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import { ProductContext } from "~/contexts/product/ProductContext";
 import ProductCard from "~/components/ProductList/ProductListComponent";
-
+import { NavLink } from "react-router";
+import "./ProductListView.css";
 export default function ProductListView() {
     const context = useContext(ProductContext);
     if (!context) {
@@ -12,7 +13,12 @@ export default function ProductListView() {
 
     return (
         <>
-            <h1>Liste des produits</h1>
+        {/* <div className="product-list-header">
+            <NavLink to="/" className="product-card-link">
+                <button className="btn btn-primary">Retour à l'accueil</button>
+            </NavLink>
+        </div> */}
+        <h1>Liste des produits</h1>
             {products.length > 0 ? (
                 <div className="product-list">
                     {products.map((product) => (

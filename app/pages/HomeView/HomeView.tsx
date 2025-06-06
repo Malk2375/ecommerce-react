@@ -15,18 +15,16 @@ export default function HomeView() {
         <>
             <div className="home-container">
                 <h1 className="site-title">Site ecommerce</h1>
-                {isLogged ? (
                     <div className="logged-in-section">
                         <h2>Bienvenue sur le site !</h2>
-                        <p>Vous êtes connecté en tant que <strong>{user.username}</strong></p>
+                        {isLogged ? (
+                            <>
+                                <p>Bonjour, {user?.username} !</p>
+                            </>
+                        ) : null}
                         <NavLink className="nav-link" to="/products">Catalogue des produits</NavLink>
-                        <button className="logout-button" onClick={handleLogout}>Se déconnecter</button>
                     </div>
-                ) : (
-                    <div className="logged-out-section">
-                        <NavLink className="login-button" to="/login">Se connecter</NavLink>
-                    </div>
-                )}
+                
             </div>
         </>
     );
