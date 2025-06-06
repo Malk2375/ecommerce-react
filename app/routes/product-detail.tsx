@@ -1,0 +1,19 @@
+import type { Route } from "./+types/home";
+import ProductDetailView from "~/pages/ProductDetailView/ProductDetailView";
+import { ProductProvider } from "~/contexts/product/ProductContext";
+
+export function meta({}: Route.MetaArgs) {
+    return [
+        { title: "Route d'un seul produit" },
+        { name: "description", content: "Bienvenu a la page d'un seul produit" },
+    ];
+}
+
+export default function detail() {
+    return (
+    <ProductProvider>
+        <ProductDetailView />
+    </ProductProvider>
+    )
+    ;
+}
