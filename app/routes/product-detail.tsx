@@ -11,9 +11,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function detail() {
     return (
-    <ProductProvider>
         <ProductDetailView />
-    </ProductProvider>
     )
     ;
 }

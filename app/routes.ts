@@ -4,10 +4,13 @@ export default [
     index("routes/home.tsx"),
     route("login", "routes/login.tsx"),
     // route("admin-login", "routes/admin-login.tsx"),
-    ...prefix("products", [
-        index("routes/product-list.tsx"),
-        route(":productId", "pages/ProductDetailView/ProductDetailView.tsx")
+    layout("layouts/product-layout.tsx", [
+        ...prefix("products", [
+            index("routes/product-list.tsx"),
+            route(":productId", "routes/product-detail.tsx")
+        ]),
     ]),
+
     // route("cart", "routes/cart.tsx"),
     // route("profile", "pages/ProfileView/ProfileView.tsx"),
     // route("*", "routes/error.tsx")
