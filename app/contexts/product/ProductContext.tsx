@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState, type ReactNode } from "react";
 
 export interface Product {
+    rating: { rate: number; count: number; };
     id: number;
     title: string;
     price: number;

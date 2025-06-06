@@ -1,0 +1,67 @@
+/* Conteneur principal de la carte */
+.product-card-component {
+    width: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+/* Image du produit */
+.product-image-component {
+    width: 45%;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+/* Infos produit */
+.product-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Titre du produit */
+.product-info h3 {
+    font-size: 1.25rem;
+    color: #333;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Catégorie */
+.product-info p {
+    font-size: 0.875rem;
+    color: #666;
+    margin: 0;
+}
+
+/* Note et avis */
+.product-rating {
+    font-size: 0.875rem;
+    color: #f39c12;
+}
+
+/* Prix */
+.product-info p strong {
+    color: #333;
+    font-weight: 600;
+}
+
+.product-info p:last-child {
+    font-size: 1.125rem;
+    color: #27ae60;
+}
+
+
+/* Pour les petits écrans */
+@media (max-width: 768px) {
+    .product-card-component {
+        width: 100%;
+    }
+}

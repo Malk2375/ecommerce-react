@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ProductContext } from "~/contexts/product/ProductContext";
-import ProductCard from "~/components/ProductList/ProductListComponent";
+import ProductCardInList from "~/components/ProductListComponent/ProductListComponent";
 import { NavLink } from "react-router";
 import "./ProductListView.css";
 export default function ProductListView() {
@@ -23,7 +23,7 @@ export default function ProductListView() {
                 <div className="product-list">
                     {products.map((product) => (
                         <div key={product.id} className="product-item">
-                            <ProductCard product={product} />
+                            <ProductCardInList product={product} />
                         </div>
                     ))}
                 </div>

@@ -1,6 +1,8 @@
 import { use, useContext } from "react";
 import { useParams } from "react-router";
 import { ProductContext } from "~/contexts/product/ProductContext";
+import ProductCardComponent from "~/components/ProductCardComponent/ProductCardComponent";
+import "./ProductDetailView.css";
 
 export default function ProductDetailView() {
     const context = useContext(ProductContext);
@@ -20,9 +22,16 @@ export default function ProductDetailView() {
         return <p>Produit introuvable.</p>;
     }
     return (
-        <div>
+        <div className="product-detail-view">
             <h1>Détails du produit</h1>
-            {product.title}
+            <ProductCardComponent
+                title={product.title}
+                description={product.description}
+                image={product.image}
+                price={product.price}
+                category={product.category}
+                rating={product.rating}
+            />        
         </div>
     );
 }
