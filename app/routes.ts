@@ -10,7 +10,8 @@ export default [
     layout("layouts/product-layout.tsx", [
         ...prefix("products", [
             index("routes/product-list.tsx"),
-            route(":productId", "routes/product-detail.tsx")
+            route(":productId", "routes/product-detail.tsx"),
+            route("update/:productId", "routes/product-update.tsx"),
         ]),
     ]),
 

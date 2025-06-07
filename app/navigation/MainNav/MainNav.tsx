@@ -25,7 +25,7 @@ export default function MainNav() {
                 {adminIsLogged ? (
                     <div className="logged-in-section">
                         <NavLink className="nav-link" to="/admin/dashboard">Dashboard</NavLink>
-                        <button className="logout-button" onClick={handleAdminLogout}>Se déconnecter admin</button>
+                        <button className="logout-button" onClick={handleAdminLogout}>Se déconnecter</button>
                     </div>
                 ) : isLogged && !adminIsLogged ? (
                     <div className="logged-in-section">

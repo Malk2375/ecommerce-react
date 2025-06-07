@@ -1,6 +1,6 @@
 /* Conteneur principal de la carte */
 .product-card-component {
-    width: 300px;
+    width: 34rem;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -14,7 +14,7 @@
 
 /* Image du produit */
 .product-image-component {
-    width: 45%;
+    width: 22%;
     border-bottom: 2px solid #f0f0f0;
 }
 
@@ -64,4 +64,17 @@
     .product-card-component {
         width: 100%;
     }
+}
+.product-card-button{
+    display: inline-block;
+    margin: 10px;
+    padding: 12px 24px;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+.product-card-button:hover {
+    background-color: #f0f0f0;
 }

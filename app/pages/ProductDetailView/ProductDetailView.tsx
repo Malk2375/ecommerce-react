@@ -25,13 +25,8 @@ export default function ProductDetailView() {
         <div className="product-detail-view">
             <h1>Détails du produit</h1>
             <ProductCardComponent
-                title={product.title}
-                description={product.description}
-                image={product.image}
-                price={product.price}
-                category={product.category}
-                rating={product.rating}
-            />        
+                product={product}
+            />
         </div>
     );
 }

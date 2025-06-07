@@ -1,30 +1,35 @@
 import React from 'react';
+import  { AuthContext } from "~/contexts/auth/AuthContext";
+import { useContext } from "react";
 import './ProductCardComponent.css';
+import { NavLink } from "react-router";
+import type { Product } from "~/contexts/product/ProductContext";
 
-interface ProductCardI {
-    title: string;
-    description: string;
-    image: string;
-    price: number;
-    category: string;
-    rating: {
-        rate: number;
-        count: number;
-    };
+interface ProductCardProps {
+    product: Product;
 }
 
-const ProductCardComponent: React.FC<ProductCardI> = ({ title, description, image, price, category, rating }) => {
+
+const ProductCardComponent: React.FC<ProductCardProps> = ({ product }) => {
+        const { adminIsLogged } = useContext(AuthContext);
     return (
         <div className="product-card-component">
-            <img src={image} alt={title} className="product-image-component" />
+            <img src={product.image} alt={product.title} className="product-image-component" />
             <div className="product-info">
-                <h3>{title}</h3>
-                <p><strong>Catégorie:</strong> {category}</p>
-                <p>{description}</p>
+                <h3>{product.title}</h3>
+                <p><strong>Catégorie:</strong> {product.category}</p>
+                <p>{product.description}</p>
                 <div className="product-rating">
-                    <span>Note: {rating.rate}</span> | <span>{rating.count} avis</span>
+                    <span>Note: {product.rating.rate}</span> | <span>{product.rating.count} avis</span>
                 </div>
-                <p><strong>Prix:</strong> {price} €</p>
+                <p><strong>Prix:</strong> {product.price} €</p>
+                {adminIsLogged ? (
+                <>
+                    <NavLink to={`/products/update/${product.id}`} className="product-card-link">
+                        <button className="product-card-button">Editer</button>
+                    </NavLink>
+                </>
+            ) : null}
             </div>
         </div>
     );
