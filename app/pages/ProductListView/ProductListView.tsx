@@ -3,6 +3,7 @@ import { ProductContext } from "~/contexts/product/ProductContext";
 import ProductCardInList from "~/components/ProductListComponent/ProductListComponent";
 import { NavLink } from "react-router";
 import "./ProductListView.css";
+
 export default function ProductListView() {
     const context = useContext(ProductContext);
     if (!context) {

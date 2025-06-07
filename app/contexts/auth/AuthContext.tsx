@@ -5,9 +5,31 @@ export const AuthContext = createContext<any>(null!);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [isLogged, setIsLogged] = useState(false);
+    const [adminIsLogged, setAdminIsLogged] = useState(false);
     const [user, setUser] = useState<UserI>({} as UserI);
     const [error, setError] = useState<string | null>(null);
     const [readSessionInfos, setReadSessionInfos] = useState(true);
+
+    const adminCredentials = {
+        username: "admin", password: "admin123"
+    };
+    const adminInfo: UserI  = {
+        id: 90, username: "admin", password: "admin123", email: "m.abdelmalek@gmail.com", phone: "0758663561",
+        address: {
+            street: "62 rue des Martyrs",
+            city: "Lyon",
+            zipcode: "69600",
+            geolocation: {
+            lat: "50.3456",
+            long: "50.3456",
+            }
+        },
+        name: {
+            firstname: "Malek",
+            lastname: "Dorbani",
+        },
+        __v: 90 
+    };
 
     const handleLogin = async (username: string, password: string) => {
         const credentials = { username, password };
@@ -89,18 +111,55 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         }
     }, [readSessionInfos]);
 
+    useEffect(() => {
+        if (readSessionInfos) {
+            setReadSessionInfos(false);
+            const savedAdmin = sessionStorage.getItem("admin");
+            if (savedAdmin) {
+                setUser(JSON.parse(savedAdmin));  // Chargement des infos de l'admin
+                setIsLogged(true);
+                setAdminIsLogged(true);
+            }
+        }
+    }, [readSessionInfos]);
+
+    const handleAdminLogin = (username: string, password: string) => { 
+        if (username === adminCredentials.username && password === adminCredentials.password) {
+            // Sauvegarde dans sessionStorage les informations de l'admin
+            sessionStorage.setItem("admin", JSON.stringify(adminInfo));
+            setUser(adminInfo); // Définit les informations de l'utilisateur comme étant l'admin
+            setAdminIsLogged(true); // Marque l'admin comme connecté
+            setIsLogged(true); // Le status de l'utilisateur est aussi mis à jour
+            setError(null); // Si tout se passe bien, on réinitialise l'erreur
+        } else {
+            setError("Identifiants administrateur incorrects.");
+            setIsLogged(false);
+            setAdminIsLogged(false); // Assure-toi de réinitialiser l'état adminIsLogged en cas d'erreur
+        }
+    };
+
+    const adminLogout = () => {
+        sessionStorage.removeItem("admin");  // Retirer les infos de session de l'admin
+        setIsLogged(false);
+        setAdminIsLogged(false);
+        setUser({} as UserI);  // Réinitialiser l'utilisateur
+    };
+
     return (
         <AuthContext.Provider
             value={{
                 isLogged,
                 user,
                 error,
+                adminIsLogged,
                 handleLogin,
+                handleAdminLogin,
                 logout: () => {
                     deleteUserSession();
                     setIsLogged(false);
                     setUser({} as UserI);
                 },
+                adminLogout,
             }}
         >
             {children}

@@ -4,11 +4,15 @@ import { useContext } from "react";
 import { AuthContext } from "~/contexts/auth/AuthContext";
 
 export default function MainNav() {
-    const { isLogged, logout, user } = useContext(AuthContext);
+    const { adminIsLogged, isLogged, logout, user, adminLogout } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleLogout = () => {
         logout();
+        navigate("/");
+    };
+    const handleAdminLogout = () => {
+        adminLogout();
         navigate("/");
     };
     return (
@@ -18,16 +22,24 @@ export default function MainNav() {
                     <NavLink className="nav-link"  to="/">Accueil</NavLink>
                     <NavLink className="nav-link" to="/products">Catalogue des produits</NavLink>
                 </div>
-                {isLogged ? (
+                {adminIsLogged ? (
                     <div className="logged-in-section">
-
+                        <NavLink className="nav-link" to="/admin/dashboard">Dashboard</NavLink>
+                        <button className="logout-button" onClick={handleAdminLogout}>Se déconnecter admin</button>
+                    </div>
+                ) : isLogged && !adminIsLogged ? (
+                    <div className="logged-in-section">
                         <button className="logout-button" onClick={handleLogout}>Se déconnecter</button>
                     </div>
                 ) : (
                     <div className="logged-out-section">
                         <NavLink className="login-button" to="/login">Se connecter</NavLink>
+                        <NavLink className="login-button" to="/admin">Admin</NavLink>
                     </div>
                 )}
+
+
+
 
 
                 {/* <li className="main-menu-items">
