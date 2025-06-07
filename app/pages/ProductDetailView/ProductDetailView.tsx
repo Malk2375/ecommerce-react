@@ -3,9 +3,11 @@ import { useParams } from "react-router";
 import { ProductContext } from "~/contexts/product/ProductContext";
 import ProductCardComponent from "~/components/ProductCardComponent/ProductCardComponent";
 import "./ProductDetailView.css";
+import { CartContext } from "~/contexts/cart/CartContext";
 
 export default function ProductDetailView() {
     const context = useContext(ProductContext);
+    const cartContext = useContext(CartContext);
 
     const { productId } = useParams<{ productId: string }>();
     console.log("ID du produit :", productId);

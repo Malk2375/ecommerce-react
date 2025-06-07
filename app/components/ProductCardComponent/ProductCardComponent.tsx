@@ -4,14 +4,28 @@ import { useContext } from "react";
 import './ProductCardComponent.css';
 import { NavLink } from "react-router";
 import type { Product } from "~/contexts/product/ProductContext";
+import { CartContext } from "~/contexts/cart/CartContext";
 
 interface ProductCardProps {
     product: Product;
 }
 
-
 const ProductCardComponent: React.FC<ProductCardProps> = ({ product }) => {
-        const { adminIsLogged } = useContext(AuthContext);
+    const { adminIsLogged } = useContext(AuthContext);
+    const cartContext = useContext(CartContext);
+    if (!cartContext) {
+        return <p>Le contexte panier n'est pas disponibleeeeeeeeeeeeeeeeeeeeeeeeeeeeee.</p>;
+    }
+    const { addToCart } = cartContext;
+    const handleAddToCart = () => {
+        addToCart({
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            quantity: 1,
+            image: product.image,
+        });
+    };
     return (
         <div className="product-card-component">
             <img src={product.image} alt={product.title} className="product-image-component" />
@@ -33,6 +47,9 @@ const ProductCardComponent: React.FC<ProductCardProps> = ({ product }) => {
                         </NavLink>
                     </div>
                 ) : null}
+                <button className="product-card-button add-to-cart" onClick={handleAddToCart}>
+                    Ajouter au panier
+                </button>
             </div>
         </div>
     );

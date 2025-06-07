@@ -15,8 +15,9 @@ export default [
             route("delete/:productId", "routes/product-delete.tsx"),
         ]),
     ]),
+    layout("layouts/cart-layout.tsx", [
+        route("cart", "routes/cart.tsx")
+    ]),
 
-    // route("cart", "routes/cart.tsx"),
-    // route("profile", "pages/ProfileView/ProfileView.tsx"),
     // route("*", "routes/error.tsx")
 ] satisfies RouteConfig;
