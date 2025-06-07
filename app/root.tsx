@@ -22,7 +22,8 @@ export const links: Route.LinksFunction = () => [
     href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
   },
 ];
-
+import { ProductProvider } from "~/contexts/product/ProductContext";  // Import du ProductProvider
+import { CartProvider } from "~/contexts/cart/CartContext";
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -35,7 +36,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         <AuthProvider>
           <Header title="Site ecommerce"/>
-          {children}
+          <ProductProvider>
+            <CartProvider>
+              {children}
+              </CartProvider>
+          </ProductProvider>
         </AuthProvider>
         <ScrollRestoration />
         <Scripts />
