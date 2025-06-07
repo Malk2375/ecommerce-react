@@ -14,17 +14,20 @@ const ProductCardInList: React.FC<ProductCardProps> = ({ product }) => {
     return (
     <div className="product-card">
         <NavLink to={`/products/${product.id}`} className="product-card-link">
-        <img src={product.image} alt={product.title} className="product-card-image" />
+            <img src={product.image} alt={product.title} className="product-card-image" />
         </NavLink>
         <div className="product-card-details">
             <h3 className="product-card-title">{product.title}</h3>
             <p className="product-card-price">{product.price.toFixed(2)} €</p>
             {adminIsLogged ? (
-                <>
-                    <NavLink to={`/products/update/${product.id}`} className="product-card-link">
-                        <button className="product-card-button">Editer</button>
+                <div className="product-crud-buttons">
+                    <NavLink to={`/products/update/${product.id}`} className="">
+                        <button className="product-card-button edit">Editer</button>
                     </NavLink>
-                </>
+                    <NavLink to={`/products/Delete/${product.id}`} className="">
+                        <button className="product-card-button delete">Supprimer</button>
+                    </NavLink>
+                </div>
             ) : null}
         </div>
     </div>

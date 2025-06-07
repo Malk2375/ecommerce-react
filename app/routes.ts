@@ -12,6 +12,7 @@ export default [
             index("routes/product-list.tsx"),
             route(":productId", "routes/product-detail.tsx"),
             route("update/:productId", "routes/product-update.tsx"),
+            route("delete/:productId", "routes/product-delete.tsx"),
         ]),
     ]),
 

@@ -24,12 +24,15 @@ const ProductCardComponent: React.FC<ProductCardProps> = ({ product }) => {
                 </div>
                 <p><strong>Prix:</strong> {product.price} €</p>
                 {adminIsLogged ? (
-                <>
-                    <NavLink to={`/products/update/${product.id}`} className="product-card-link">
-                        <button className="product-card-button">Editer</button>
-                    </NavLink>
-                </>
-            ) : null}
+                    <div className="product-crud-buttons">
+                        <NavLink to={`/products/update/${product.id}`} className="">
+                            <button className="product-card-button edit">Editer</button>
+                        </NavLink>
+                        <NavLink to={`/products/Delete/${product.id}`} className="">
+                            <button className="product-card-button delete">Supprimer</button>
+                        </NavLink>
+                    </div>
+                ) : null}
             </div>
         </div>
     );

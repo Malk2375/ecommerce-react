@@ -19,12 +19,18 @@ export default function MainNav() {
         <nav>
             <menu className="main-menu">
                 <div className="main-menu-items">
-                    <NavLink className="nav-link"  to="/">Accueil</NavLink>
+                    {adminIsLogged ? (
+                        <div className="logged-in-section">
+                            <NavLink className="nav-link" to="/admin/dashboard">Dashboard</NavLink>
+                        </div>
+                    ) :  (
+                        <NavLink className="nav-link"  to="/">Accueil</NavLink>
+                    )
+                    }
                     <NavLink className="nav-link" to="/products">Catalogue des produits</NavLink>
                 </div>
                 {adminIsLogged ? (
                     <div className="logged-in-section">
-                        <NavLink className="nav-link" to="/admin/dashboard">Dashboard</NavLink>
                         <button className="logout-button" onClick={handleAdminLogout}>Se déconnecter</button>
                     </div>
                 ) : isLogged && !adminIsLogged ? (

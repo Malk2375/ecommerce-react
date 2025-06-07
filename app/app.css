@@ -120,3 +120,28 @@ h1 {
     font-size: 0.9rem;
     margin: 10px 0;
 }
+.product-crud-buttons{
+    display: flex;
+    justify-content: space-around;
+}
+.product-card-button{
+    margin: 10px;
+    padding: 12px 24px;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 8px;
+
+}
+.delete{
+
+    background-color: #ff4c4c;
+}
+.edit{
+    background-color: #2196F3;
+}
+.delete:hover{
+    background-color: red;
+}
+.edit:hover{
+    background-color: #008dbd;
+}
