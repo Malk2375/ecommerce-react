@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { AuthContext } from "~/contexts/auth/AuthContext";
-// import "./LoginAdminView.css";
 
 export default function LoginAdminView() {
-    const { handleAdminLogin, error, isLogged, adminIsLogged } = useContext(AuthContext);  // Utilise le contexte Auth pour appeler handleLogin
-    const [username, setUsername] = useState("");  // On utilise "username" maintenant
+    const { handleAdminLogin, error, isLogged, adminIsLogged } = useContext(AuthContext);
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
@@ -18,7 +17,7 @@ export default function LoginAdminView() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log("Admin form submitted");
-        handleAdminLogin(username, password); // Cette fonction devrait mettre à jour adminIsLogged
+        handleAdminLogin(username, password);
     };
 
     return (
@@ -29,7 +28,7 @@ export default function LoginAdminView() {
                     type="text"
                     placeholder="Nom d'utilisateur"
                     value={username}
-                    onChange={(e) => setUsername(e.target.value)}  // Mise à jour de "username"
+                    onChange={(e) => setUsername(e.target.value)}
                     className="login-input"
                     required
                 />

@@ -15,10 +15,9 @@ export default function ProductDelete() {
 
                     if (response.ok) {
                         console.log(`Produit ${productId} supprimé avec succès.`);
-                        navigate('/products'); // Redirection vers la liste des produits
+                        navigate('/products');
                     } else {
                         console.error('Échec de la suppression du produit');
-                        // Gérer les erreurs si nécessaire
                     }
                 } catch (error) {
                     console.error('Erreur de suppression :', error);
@@ -27,7 +26,7 @@ export default function ProductDelete() {
         };
 
         deleteProduct();
-    }, [productId, navigate]); // on appelle deleteProduct au chargement du composant
+    }, [productId, navigate]);
 
     return (
         <div>

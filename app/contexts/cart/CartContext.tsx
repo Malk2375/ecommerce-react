@@ -23,7 +23,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     const [cart, setCart] = useState<CartProduct[]>([]);
 
     useEffect(() => {
-        // Récupérer les produits du panier depuis le localStorage
         const savedCart = localStorage.getItem("cart");
         if (savedCart) {
             setCart(JSON.parse(savedCart));

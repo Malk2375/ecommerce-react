@@ -41,7 +41,7 @@ export default function LoginView() {
                     className="login-input"
                     required
                 />
-                {error && <p className="login-error">{error}</p>}  {/* Affiche les erreurs si elles existent */}
+                {error && <p className="login-error">{error}</p>}
                 <button type="submit" className="login-submit-button">
                     Se connecter
                 </button>

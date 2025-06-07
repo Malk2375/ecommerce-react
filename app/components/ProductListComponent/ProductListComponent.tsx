@@ -3,6 +3,7 @@ import type { Product } from "~/contexts/product/ProductContext";
 import  { AuthContext } from "~/contexts/auth/AuthContext";
 import { useContext } from "react";
 import "./ProductListComponent.css";
+import { CartContext } from "~/contexts/cart/CartContext";
 
 interface ProductCardProps {
     product: Product;
@@ -10,7 +11,20 @@ interface ProductCardProps {
 
 const ProductCardInList: React.FC<ProductCardProps> = ({ product }) => {
     const { adminIsLogged } = useContext(AuthContext);
-
+    const cartContext = useContext(CartContext);
+    if (!cartContext) {
+        return <p>Le contexte panier n'est pas disponibleeeeeeeeeeeeeeeeeeeeeeeeeeeeee.</p>;
+    }
+    const { addToCart } = cartContext;
+    const handleAddToCart = () => {
+        addToCart({
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            quantity: 1,
+            image: product.image,
+        });
+    };
     return (
     <div className="product-card">
         <NavLink to={`/products/${product.id}`} className="product-card-link">
@@ -29,6 +43,9 @@ const ProductCardInList: React.FC<ProductCardProps> = ({ product }) => {
                     </NavLink>
                 </div>
             ) : null}
+            <button className="product-card-button add-to-cart" onClick={handleAddToCart}>
+                    Ajouter au panier
+                </button>
         </div>
     </div>
     );

@@ -21,10 +21,6 @@ transition: transform 0.2s ease;
 height: 27rem;
 }
 
-/*.product-card:hover {*/
-/*transform: translateY(-8px);*/
-/*}*/
-
 .product-card-link {
 display: block;
 text-align: center;

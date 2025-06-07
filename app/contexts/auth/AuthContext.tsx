@@ -125,12 +125,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const handleAdminLogin = (username: string, password: string) => { 
         if (username === adminCredentials.username && password === adminCredentials.password) {
-            // Sauvegarde dans sessionStorage les informations de l'admin
             sessionStorage.setItem("admin", JSON.stringify(adminInfo));
-            setUser(adminInfo); // Définit les informations de l'utilisateur comme étant l'admin
-            setAdminIsLogged(true); // Marque l'admin comme connecté
-            setIsLogged(true); // Le status de l'utilisateur est aussi mis à jour
-            setError(null); // Si tout se passe bien, on réinitialise l'erreur
+            setUser(adminInfo);
+            setAdminIsLogged(true);
+            setIsLogged(true);
+            setError(null);
         } else {
             setError("Identifiants administrateur incorrects.");
             setIsLogged(false);

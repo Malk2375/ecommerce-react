@@ -28,6 +28,7 @@ export default function MainNav() {
                     )
                     }
                     <NavLink className="nav-link" to="/products">Catalogue des produits</NavLink>
+                    <NavLink className="nav-link" to="/cart">Panier</NavLink>
                 </div>
                 {adminIsLogged ? (
                     <div className="logged-in-section">
@@ -43,28 +44,6 @@ export default function MainNav() {
                         <NavLink className="login-button" to="/admin">Admin</NavLink>
                     </div>
                 )}
-
-
-
-
-
-                {/* <li className="main-menu-items">
-                    <NavLink to="/products">Produits</NavLink>
-                </li> */}
-                {/* Exemples désactivés */}
-                {/* <li className="main-menu-items">
-                    <NavLink to="/films">Films</NavLink>
-                </li> */}
-                {/* Connexion/Déconnexion */}
-                {/* {
-                    !isLogged 
-                    ? (<li className="main-menu-items">
-                        <NavLink to="/connexion">Connexion</NavLink>
-                    </li>) 
-                    : (<li className="main-menu-items">
-                        <NavLink to="/deconnexion">Déconnexion</NavLink>
-                    </li>)
-                } */}
             </menu>
         </nav>
     );

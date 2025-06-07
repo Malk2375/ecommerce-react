@@ -19,10 +19,8 @@ export default function ProductListView() {
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
 
-    // Calculer le nombre total de pages
     const totalPages = Math.ceil(products.length / productsPerPage);
 
-    // Gérer la navigation entre les pages
     const nextPage = () => {
         if (currentPage < totalPages) {
             setCurrentPage(currentPage + 1);

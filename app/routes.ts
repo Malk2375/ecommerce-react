@@ -18,6 +18,4 @@ export default [
     layout("layouts/cart-layout.tsx", [
         route("cart", "routes/cart.tsx")
     ]),
-
-    // route("*", "routes/error.tsx")
 ] satisfies RouteConfig;

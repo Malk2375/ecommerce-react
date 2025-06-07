@@ -1,12 +1,12 @@
-// import { Outlet } from "react-router";
-// import { CartProvider } from "~/contexts/cart/CartContext";
+import { Outlet } from "react-router";
+import { CartProvider } from "~/contexts/cart/CartContext";
 
-// function CartLayout() {
-//     return (
-//         <CartProvider>
-//             <Outlet />
-//         </CartProvider>  
-//     );
-// }
+function CartLayout() {
+    return (
+        <CartProvider>
+            <Outlet />
+        </CartProvider>
+    );
+}
 
-// export default CartLayout;
+export default CartLayout;

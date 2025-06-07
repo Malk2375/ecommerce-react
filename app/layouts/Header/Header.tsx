@@ -8,7 +8,5 @@ export default function Header({title}: HeaderI){
     return(
     <header className="main-head">
         <MainNav/>
-        {/* <h1>{title ?? "React IPSSI"}</h1> */}
-        
     </header>);
 }

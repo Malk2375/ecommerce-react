@@ -4,15 +4,7 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
-/* 
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
-} */
 
 .login{
   @apply flex items-center justify-center bg-gray-100 w-3xs;
@@ -21,7 +13,7 @@ body {
 button {
     position: relative;
     cursor: pointer;
-    z-index: 1000;  /* Assure-toi qu'il est au-dessus des autres éléments */
+    z-index: 1000;
 }
 
 body {
@@ -144,4 +136,18 @@ h1 {
 }
 .edit:hover{
     background-color: #008dbd;
+}
+
+.add-to-cart{
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.add-to-cart:hover {
+    background-color: #079f0d;
 }
